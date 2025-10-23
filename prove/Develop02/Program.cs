@@ -23,13 +23,13 @@ class Program
             {
                 if (number == 1)
                     journal.entries.Add(new Entry());
-                if (number == 2)
+                else if (number == 2)
                     journal.DisplayEntries();
-                if (number == 3)
+                else if (number == 3)
                     journal = saveLoad.Load();
-                if (number == 4)
+                else if (number == 4)
                     saveLoad.Save(journal);
-                if (number == 5)
+                else if (number == 5)
                     break;
             }
             Console.WriteLine(" ");

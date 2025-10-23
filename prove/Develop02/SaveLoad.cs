@@ -13,7 +13,7 @@ public class SaveLoad{
     }
     public void Save(Journal journal)
     {
-        var fileText = JsonSerializer.Serialize(journal, new JsonSerializerOptions { WriteIndented = true });
+        var fileText = JsonSerializer.Serialize(journal);
         File.WriteAllText(path, fileText);
     }
 
