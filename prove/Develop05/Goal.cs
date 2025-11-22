@@ -5,25 +5,25 @@ using System.Text.Json.Serialization;
 [JsonDerivedType(typeof(Checklist), typeDiscriminator: "checklist")]
 public abstract class Goal
 {
-    [JsonInclude] protected string goal { get; set; }
-    [JsonInclude] protected string description { get; set; }
-    [JsonInclude] protected int points { get; set; }
+    [JsonInclude] protected string _goal { get; set; }
+    [JsonInclude] protected string _description { get; set; }
+    [JsonInclude] protected int _points { get; set; }
     public abstract void Display(bool listing);
     public virtual void CreateGoal()
     {
         // Get basic inputs
         Console.Write("What is the name of your goal? ");
-        goal = Console.ReadLine();
+        _goal = Console.ReadLine();
         Console.Write("What is a short description of your goal? ");
-        description = Console.ReadLine();
+        _description = Console.ReadLine();
         Console.Write("What is the ammount of points associated goal? ");
-        points = GetInt();
+        _points = GetInt();
     }
 
     public virtual int GetPoints()
     {
-        Console.WriteLine($"Congratulations! You earned {points} points!");
-        return points;
+        Console.WriteLine($"Congratulations! You earned {_points} points!");
+        return _points;
     }
 
     public int GetInt()

@@ -2,19 +2,19 @@ using System.Text.Json.Serialization;
 
 public class Eternal : Goal
 {
-    [JsonInclude] int completed { get; set; }
+    [JsonInclude] int _completed { get; set; }
 
     public Eternal() {}
 
     public override void Display(bool listing)
     {
         // Write Goal information
-        Console.WriteLine(listing ? $"[{completed}] {goal} ({description})" : $"{goal} ({description})");
+        Console.WriteLine(listing ? $"[{_completed}] {_goal} ({_description})" : $"{_goal} ({_description})");
     }
 
     public override void CreateGoal()
     {
-        completed++;
+        _completed++;
         base.CreateGoal();
     }
 }

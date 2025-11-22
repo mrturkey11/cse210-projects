@@ -5,15 +5,15 @@ using System.Text.Json;
 using System.Formats.Asn1;
 class Program
 {
-    static List<Goal> goals { get; set; } = new List<Goal>();
-    static int points;
+    static List<Goal> _goals { get; set; } = new List<Goal>();
+    static int _points;
     static void Main(string[] args)
     {
         while (true)
         {
             DisplayMenu();
             Console.WriteLine("");
-            Console.WriteLine($"You have {points} points.");
+            Console.WriteLine($"You have {_points} points.");
             Console.WriteLine("");
         }
     }
@@ -55,7 +55,7 @@ class Program
             case(4):
                 Console.Write("Enter a name: ");
                 string file = Console.ReadLine();
-                goals = Load(file);
+                _goals = Load(file);
                 return;
             case(5):
                 DisplayGoals(false);
@@ -69,8 +69,8 @@ class Program
                     else
                         Console.Write("\n Enter a valid input: ");
                 }
-                points += goals[selected - 1].GetPoints();            
-                Console.WriteLine($"You now have {points} points.");
+                _points += _goals[selected - 1].GetPoints();            
+                Console.WriteLine($"You now have {_points} points.");
 
                 return;
             case(6):
@@ -89,7 +89,7 @@ class Program
         string directory = AppContext.BaseDirectory;
         string[] splits = directory.Split($"bin");
         string path = splits[0] + name;
-        var fileText = JsonSerializer.Serialize(goals);
+        var fileText = JsonSerializer.Serialize(_goals);
         File.WriteAllText(path, fileText);
     }
     static List<Goal> Load(string name)
@@ -117,12 +117,12 @@ class Program
             else
                 Console.Write("\n Enter a valid input: ");
         }
-        if(selection == 1 && points >= 400)
-            points -= 400;
-        else if(selection == 2 && points >= 1000)
-            points -= 1000;
-        else if(selection == 3 && points >= 2000)
-            points -= 2000;
+        if(selection == 1 && _points >= 400)
+            _points -= 400;
+        else if(selection == 2 && _points >= 1000)
+            _points -= 1000;
+        else if(selection == 3 && _points >= 2000)
+            _points -= 2000;
         else
         {
             Console.WriteLine("Come back later!");
@@ -133,10 +133,10 @@ class Program
     static void DisplayGoals(bool list)
     {
         Console.WriteLine("The goals are: ");
-        for(int i = 1; i < goals.Count + 1; i++)
+        for(int i = 1; i < _goals.Count + 1; i++)
         {
             Console.Write($" {i}.  ");
-            goals[i - 1].Display(list);
+            _goals[i - 1].Display(list);
         }
     }
     static void CreateGoal()
@@ -160,16 +160,16 @@ class Program
         switch (selection)
         {
             case(1):
-                goals.Add(new Simple());
-                goals[goals.Count - 1].CreateGoal();
+                _goals.Add(new Simple());
+                _goals[_goals.Count - 1].CreateGoal();
                 return;
             case(2):
-                goals.Add(new Eternal());
-                goals[goals.Count - 1].CreateGoal();
+                _goals.Add(new Eternal());
+                _goals[_goals.Count - 1].CreateGoal();
                 return;
             case(3):
-                goals.Add(new Checklist());
-                goals[goals.Count - 1].CreateGoal();
+                _goals.Add(new Checklist());
+                _goals[_goals.Count - 1].CreateGoal();
                 return;
             default:
                 CreateGoal();
